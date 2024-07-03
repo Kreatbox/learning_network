@@ -12,7 +12,7 @@ class TestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tests'),
+        title: Text('التدريبات'),
       ),
       body: FutureBuilder<List<Test>>(
         future: fetchTests(),
@@ -76,7 +76,7 @@ class QuestionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Questions'),
+        title: Text('الأسئلة'),
       ),
       body: FutureBuilder<List<Question>>(
         future: fetchQuestions(),

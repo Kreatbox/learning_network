@@ -58,15 +58,15 @@ class DatabaseHelper {
     ''');
 
     // Prepopulate the database with initial data
-    await db.insert('lessons', {'lesson_name': 'Lesson 1'});
-    await db.insert('tests', {'lesson_id': 1, 'test_name': 'Test 1'});
+    await db.insert('lessons', {'lesson_name': 'الدرس الأول'});
+    await db.insert('tests', {'lesson_id': 1, 'test_name': 'الاختبار الأول'});
     await db.insert('questions', {
       'test_id': 1,
-      'question_text': 'What is networking?',
-      'choice1': 'Option 1',
-      'choice2': 'Option 2',
-      'choice3': 'Option 3',
-      'choice4': 'Option 4',
+      'question_text': '2+2?',
+      'choice1': '4',
+      'choice2': '1',
+      'choice3': '21342',
+      'choice4': '22',
       'correct_choice': 1
     });
   }
