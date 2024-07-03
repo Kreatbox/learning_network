@@ -5,10 +5,10 @@ class LessonsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lessons'),
+        title: Text('الدروس'),
       ),
       body: Center(
-        child: Text('This is the lessons page'),
+        child: Text('هذه هية صفحة الدروس'),
       ),
     );
   }

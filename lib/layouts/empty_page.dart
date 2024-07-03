@@ -5,10 +5,10 @@ class EmptyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Empty Page'),
+        title: Text('صفحة فارغة للتعديل عند الحاجة'),
       ),
       body: Center(
-        child: Text('This is an empty page'),
+        child: Text('هون اذا في صفحة لنباشر شغل فيها'),
       ),
     );
   }
