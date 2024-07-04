@@ -1,4 +1,6 @@
+// ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 
 class DatabaseHelper {
@@ -57,21 +59,41 @@ class DatabaseHelper {
     )
     ''');
 
-    // Prepopulate the database with initial data
     await db.insert('lessons', {'lesson_name': 'الدرس الأول'});
-    await db.insert('tests', {'lesson_id': 1, 'test_name': 'الاختبار الأول'});
+    await db
+        .insert('tests', {'lesson_id': 1, 'test_name': 'إختبار الدرس الأول'});
+    await db.insert('lessons', {'lesson_name': 'الدرس الثاني'});
+    await db
+        .insert('tests', {'lesson_id': 2, 'test_name': 'إختبار الدرس الثاني'});
     await db.insert('questions', {
       'test_id': 1,
-      'question_text': '2+2?',
-      'choice1': '4',
-      'choice2': '1',
-      'choice3': '21342',
-      'choice4': '22',
+      'question_text': ':الحالة الاولى في دورة حياة النيسب هي',
+      'choice1': 'عدم الانطلاق',
+      'choice2': 'الانطلاق',
+      'choice3': 'التوقف الأول',
+      'choice4': 'التعليق',
       'correct_choice': 1
+    });
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': ':يدخل النيسب في حالة الإيقاف أو الإحباط عند',
+      'choice1': 'انهاء المهام بشكل طبيعي',
+      'choice2': 'انهاء المهام بشكل مجبر',
+      'choice3': 'عند العجز على  استخدام أي معالج',
+      'choice4': 'الجواب 1 و 2',
+      'correct_choice': 4
+    });
+    await db.insert('questions', {
+      'test_id': 2,
+      'question_text': ':من خواص الإتصال المرتبط',
+      'choice1': 'ممكن أن تضيع الرساالة المرسلة',
+      'choice2': 'يشابه الخدمة البريدية',
+      'choice3': 'قابل لإرسال رسالتين في مسارين مختلفين',
+      'choice4': 'يغلق عند ينتهي الاتصال من أحد الطرفين',
+      'correct_choice': 4
     });
   }
 
-  // Define methods to retrieve data from the database
   Future<List<Map<String, dynamic>>> getTests() async {
     Database db = await database;
     return await db.query('tests');
