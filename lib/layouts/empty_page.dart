@@ -9,8 +9,26 @@ class EmptyPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('صفحة فارغة للتعديل عند الحاجة'),
       ),
-      body: const Center(
-        child: Text('هون اذا في صفحة لنباشر شغل فيها'),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const Center(
+            child: Text(
+              'هون اذا في صفحة لنباشر شغل فيها',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

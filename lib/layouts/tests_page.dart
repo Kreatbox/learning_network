@@ -15,32 +15,61 @@ class TestsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('الإختبارات'),
       ),
-      body: FutureBuilder<List<Test>>(
-        future: fetchTests(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<Test>? tests = snapshot.data;
-            return ListView.builder(
-              itemCount: tests!.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(tests[index].testName),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              QuestionsPage(testId: tests[index].testId)),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          FutureBuilder<List<Test>>(
+            future: fetchTests(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<Test>? tests = snapshot.data;
+                return ListView.builder(
+                  itemCount: tests!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 2.0),
+                      child: Card(
+                        elevation: 4.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: ListTile(
+                          title: Center(
+                            child: Text(
+                              tests[index].testName,
+                              style: const TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    QuestionsPage(testId: tests[index].testId),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     );
                   },
                 );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return const CircularProgressIndicator();
-        },
+              } else if (snapshot.hasError) {
+                return Center(child: Text("${snapshot.error}"));
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+        ],
       ),
     );
   }
@@ -117,54 +146,67 @@ class _QuestionsPageState extends State<QuestionsPage> {
       appBar: AppBar(
         title: const Text('الأسئلة'),
       ),
-      body: FutureBuilder<List<Question>>(
-        future: futureQuestions,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            questions = snapshot.data!;
-            Question currentQuestion = questions[currentQuestionIndex];
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      currentQuestion.questionText,
-                      style: const TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ...List.generate(4, (index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Card(
-                        color: Colors.blueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListTile(
-                          onTap: () => submitAnswer(index + 1),
-                          title: Text(
-                            currentQuestion.choices[index],
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 18.0),
-                          ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          FutureBuilder<List<Question>>(
+            future: futureQuestions,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                questions = snapshot.data!;
+                Question currentQuestion = questions[currentQuestionIndex];
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          currentQuestion.questionText,
+                          style: const TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    );
-                  }),
-                ],
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+                      const SizedBox(height: 20),
+                      ...List.generate(4, (index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Card(
+                            color: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              onTap: () => submitAnswer(index + 1),
+                              title: Text(
+                                currentQuestion.choices[index],
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+        ],
       ),
     );
   }
@@ -214,28 +256,40 @@ class ScorePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('النتائج'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'علامتك',
-              style: TextStyle(fontSize: 24.0),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
-            Text(
-              '$score / $totalQuestions',
-              style:
-                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'علامتك',
+                  style: TextStyle(fontSize: 24.0),
+                ),
+                Text(
+                  '$score / $totalQuestions',
+                  style: const TextStyle(
+                      fontSize: 24.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                  },
+                  child: const Text('العودة إلى الاختبارات'),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-              },
-              child: const Text('العودة إلى الاختبارات'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
