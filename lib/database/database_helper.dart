@@ -26,7 +26,6 @@ class DatabaseHelper {
     if (kIsWeb) {
       var factory = databaseFactoryFfiWeb;
       var db = await factory.openDatabase('networking.db');
-      // Check if the tables exist, if not, create them
       await _checkAndCreateTables(db);
       return db;
     } else {
@@ -40,7 +39,6 @@ class DatabaseHelper {
   }
 
   Future<void> _checkAndCreateTables(Database db) async {
-    // Check if the tables exist
     var result = await db.rawQuery(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='tests'");
     if (result.isEmpty) {
@@ -113,11 +111,13 @@ class DatabaseHelper {
     });
   }
 
+  // هنا تم انشاء List الإختبارات وبنفس الطريقة يجب انشاء الدروس
   Future<List<Map<String, dynamic>>> getTests() async {
     Database db = await database;
     return await db.query('tests');
   }
 
+  // هنا تم انشاء List الاسئلة
   Future<List<Map<String, dynamic>>> getQuestions(int testId) async {
     Database db = await database;
     return await db.query(
@@ -128,77 +128,3 @@ class DatabaseHelper {
     );
   }
 }
-
-
-// here if we add sql file instead 
-
-// import 'package:sqflite/sqflite.dart';
-// import 'package:path/path.dart';
-// import 'package:flutter/services.dart';
-// import 'dart:io';
-
-// class DatabaseHelper {
-//   static final DatabaseHelper _instance = DatabaseHelper._internal();
-
-//   factory DatabaseHelper() {
-//     return _instance;
-//   }
-
-//   DatabaseHelper._internal();
-
-//   static Database? _database;
-
-//   Future<Database> get database async {
-//     if (_database != null) return _database!;
-//     _database = await _initDatabase();
-//     return _database!;
-//   }
-
-//   Future<Database> _initDatabase() async {
-//     String databasesPath = await getDatabasesPath();
-//     String path = join(databasesPath, 'networking.db');
-
-//     // Check if the database already exists
-//     bool dbExists = await databaseExists(path);
-
-//     if (!dbExists) {
-//       // Copy from assets
-//       try {
-//         await Directory(dirname(path)).create(recursive: true);
-//       } catch (_) {}
-//       ByteData data = await rootBundle.load(join('assets', 'networking.db'));
-//       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-//       await File(path).writeAsBytes(bytes, flush: true);
-//     }
-
-//     return await openDatabase(path);
-//   }
-
-//   Future<List<Map<String, dynamic>>> getTests() async {
-//     Database db = await database;
-//     return await db.query('tests');
-//   }
-
-//   Future<List<Map<String, dynamic>>> getQuestions(int testId) async {
-//     Database db = await database;
-//     return await db.query(
-//       'questions',
-//       where: 'test_id = ?',
-//       whereArgs: [testId],
-//       orderBy: 'state ASC',
-//     );
-//   }
-// }
-
-// هون ضيف للويب
-
-
-//  var path = '/my/db/path';
-// if (kIsWeb) {
-//   // Change default factory on the web
-//   databaseFactory = databaseFactoryFfiWeb;
-//   path = 'my_web_web.db';
-// }
-
-// // open the database
-// var db = openDatabase(path);
