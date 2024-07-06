@@ -3,9 +3,16 @@ import '../database/database_helper.dart';
 
 class TestsPage extends StatelessWidget {
   const TestsPage({super.key});
+
+  // دالة لجلب الاختبارات من قاعدة البيانات
   Future<List<Test>> fetchTests() async {
+    // إنشاء كائن DatabaseHelper للوصول إلى قاعدة البيانات
     final dbHelper = DatabaseHelper();
+
+    // جلب قائمة من خرائط البيانات (Map) التي تمثل الاختبارات من قاعدة البيانات
     final testsMapList = await dbHelper.getTests();
+
+    // تحويل قائمة الخرائط إلى قائمة من كائنات Test باستخدام fromJson
     return testsMapList.map((map) => Test.fromJson(map)).toList();
   }
 
@@ -17,6 +24,7 @@ class TestsPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          // خلفية الصفحة
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -25,11 +33,15 @@ class TestsPage extends StatelessWidget {
               ),
             ),
           ),
+          // بناء واجهة المستخدم بناءً على البيانات المسترجعة من قاعدة البيانات
           FutureBuilder<List<Test>>(
-            future: fetchTests(),
+            future: fetchTests(), // استدعاء دالة جلب البيانات من قاعدة البيانات
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                // الحصول على البيانات من snapshot إذا كانت موجودة
                 List<Test>? tests = snapshot.data;
+
+                // عرض قائمة بالاختبارات باستخدام ListView.builder
                 return ListView.builder(
                   itemCount: tests!.length,
                   itemBuilder: (context, index) {
@@ -75,6 +87,7 @@ class TestsPage extends StatelessWidget {
   }
 }
 
+// نموذج بيانات الاختبار
 class Test {
   final int testId;
   final int lessonId;
@@ -82,6 +95,7 @@ class Test {
 
   Test({required this.testId, required this.lessonId, required this.testName});
 
+  // إنشاء كائن Test من JSON
   factory Test.fromJson(Map<String, dynamic> json) {
     return Test(
       testId: json['test_id'],
@@ -91,6 +105,7 @@ class Test {
   }
 }
 
+// صفحة عرض الأسئلة
 class QuestionsPage extends StatefulWidget {
   final int testId;
 
@@ -102,6 +117,7 @@ class QuestionsPage extends StatefulWidget {
 }
 
 class _QuestionsPageState extends State<QuestionsPage> {
+  // متغير للاحتفاظ بالأسئلة المستقبلة من قاعدة البيانات
   late Future<List<Question>> futureQuestions;
   List<Question> questions = [];
   int currentQuestionIndex = 0;
@@ -111,21 +127,31 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   void initState() {
     super.initState();
+    // استدعاء دالة جلب الأسئلة من قاعدة البيانات عند تهيئة الصفحة
     futureQuestions = fetchQuestions();
   }
 
+  // دالة لجلب الأسئلة من قاعدة البيانات
   Future<List<Question>> fetchQuestions() async {
+    // إنشاء كائن DatabaseHelper للوصول إلى قاعدة البيانات
     final dbHelper = DatabaseHelper();
+
+    // جلب قائمة من خرائط البيانات (Map) التي تمثل الأسئلة من قاعدة البيانات
     final questionsMapList = await dbHelper.getQuestions(widget.testId);
+
+    // تحويل قائمة الخرائط إلى قائمة من كائنات Question باستخدام fromJson
     return questionsMapList.map((map) => Question.fromJson(map)).toList();
   }
 
+  // دالة لإرسال الإجابة والتحقق منها
   void submitAnswer(int selectedChoice) {
     setState(() {
       selectedChoices.add(selectedChoice);
+      // التحقق من صحة الإجابة المرسلة
       if (questions[currentQuestionIndex].correctChoice == selectedChoice) {
         score++;
       }
+      // الانتقال إلى السؤال التالي أو عرض صفحة النتيجة
       if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
       } else {
@@ -148,6 +174,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
       ),
       body: Stack(
         children: [
+          // خلفية الصفحة
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -156,8 +183,10 @@ class _QuestionsPageState extends State<QuestionsPage> {
               ),
             ),
           ),
+          // بناء واجهة المستخدم بناءً على البيانات المسترجعة من قاعدة البيانات
           FutureBuilder<List<Question>>(
-            future: futureQuestions,
+            future:
+                futureQuestions, // استدعاء دالة جلب البيانات من قاعدة البيانات
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 questions = snapshot.data!;
@@ -177,6 +206,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         ),
                       ),
                       const SizedBox(height: 20),
+                      // عرض الخيارات للإجابة على السؤال
                       ...List.generate(4, (index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -186,7 +216,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: ListTile(
-                              onTap: () => submitAnswer(index + 1),
+                              onTap: () => submitAnswer(
+                                  index + 1), // إرسال الإجابة عند النقر
                               title: Text(
                                 currentQuestion.choices[index],
                                 style: const TextStyle(
@@ -212,6 +243,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   }
 }
 
+// نموذج بيانات السؤال
 class Question {
   final int questionId;
   final String questionText;
@@ -227,6 +259,7 @@ class Question {
     required this.state,
   });
 
+  // إنشاء كائن Question من JSON
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
       questionId: json['question_id'],
@@ -243,6 +276,7 @@ class Question {
   }
 }
 
+// صفحة عرض النتيجة النهائية
 class ScorePage extends StatelessWidget {
   final int score;
   final int totalQuestions;
@@ -258,6 +292,7 @@ class ScorePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          // خلفية الصفحة
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -266,6 +301,7 @@ class ScorePage extends StatelessWidget {
               ),
             ),
           ),
+          // عرض النتيجة النهائية
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
