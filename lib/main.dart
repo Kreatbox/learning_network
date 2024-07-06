@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'تعليم محتوى مادة الشبكات',
+      title: "تبسيط تعليم برمجة التطبيقات الشبكية",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -29,14 +29,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تعليم محتوى مادة الشبكات'),
+        title: const Text("تطبيق تبسيط تعليم برمجة التطبيقات الشبكية"),
       ),
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
+                image: AssetImage('assets/images/network.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   child: const Align(
                     alignment: Alignment.topCenter,
                     child: Text(
-                      'أهلاً بك في برنامج\n! تعليم مادة الشبكات',
+                      " مرحباً بك في تطبيق تبسيط تعليم برمجة التطبيقات الشبكية",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 28,
@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('الصفحة المؤقتة'),
+                    child: const Text("تعريف بمحتوى التطبيق "),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('الدروس'),
+                    child: const Text("المحتوى"),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -125,7 +125,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('التدريبات'),
+                    child: const Text("الاختبارات"),
                   ),
                 ),
                 const Spacer(), // Push the content to the bottom
