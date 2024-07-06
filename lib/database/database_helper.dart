@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -21,12 +23,29 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'networking.db');
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: _onCreate,
-    );
+    if (kIsWeb) {
+      var factory = databaseFactoryFfiWeb;
+      var db = await factory.openDatabase('networking.db');
+      // Check if the tables exist, if not, create them
+      await _checkAndCreateTables(db);
+      return db;
+    } else {
+      String path = join(await getDatabasesPath(), 'networking.db');
+      return await openDatabase(
+        path,
+        version: 1,
+        onCreate: _onCreate,
+      );
+    }
+  }
+
+  Future<void> _checkAndCreateTables(Database db) async {
+    // Check if the tables exist
+    var result = await db.rawQuery(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='tests'");
+    if (result.isEmpty) {
+      await _onCreate(db, 1);
+    }
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -110,6 +129,7 @@ class DatabaseHelper {
   }
 }
 
+
 // here if we add sql file instead 
 
 // import 'package:sqflite/sqflite.dart';
@@ -169,3 +189,16 @@ class DatabaseHelper {
 //     );
 //   }
 // }
+
+// هون ضيف للويب
+
+
+//  var path = '/my/db/path';
+// if (kIsWeb) {
+//   // Change default factory on the web
+//   databaseFactory = databaseFactoryFfiWeb;
+//   path = 'my_web_web.db';
+// }
+
+// // open the database
+// var db = openDatabase(path);
