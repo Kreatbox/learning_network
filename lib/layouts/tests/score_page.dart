@@ -44,7 +44,7 @@ class ScorePage extends StatelessWidget {
                     // العودة إلى صفحة الاختبارات الرئيسية
                     Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
-                  child: const Text('العودة إلى الاختبارات'),
+                  child: const Text('العودة إلى الصفحة الرئيسية'),
                 ),
               ],
             ),

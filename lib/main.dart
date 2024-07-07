@@ -37,8 +37,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("تطبيق تبسيط تعليم برمجة التطبيقات الشبكية"),
-        leading: Icon(Icons.menu),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
+        leading: const Icon(Icons.menu),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.logout))],
       ),
       body: Stack(
         children: [

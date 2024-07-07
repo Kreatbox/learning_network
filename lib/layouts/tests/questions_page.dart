@@ -80,11 +80,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
       body: Stack(
         children: [
           Container(
-            height: 240,
+            height: 230,
             color: Colors.blue[400],
           ),
           Container(
-            height: 140,
+            height: 130,
             color: Colors.blue,
           ),
           // مركز الصفحة
@@ -147,7 +147,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(0),
                                       ),
                                     ),
                                   ),
@@ -163,19 +163,33 @@ class _QuestionsPageState extends State<QuestionsPage> {
                             ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       // زر التالي
-                      ElevatedButton(
-                        onPressed: answered
-                            ? () {
-                                nextQuestion();
-                              }
-                            : null,
-                        child: Text(
-                          answered &&
-                                  currentQuestionIndex == questions.length - 1
-                              ? 'انتهى'
-                              : 'التالي',
+                      SizedBox(
+                        width: double.infinity,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: answered
+                              ? () {
+                                  nextQuestion();
+                                }
+                              : null,
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            answered &&
+                                    currentQuestionIndex == questions.length - 1
+                                ? 'انتهى'
+                                : 'التالي',
+                          ),
                         ),
                       ),
                     ],
