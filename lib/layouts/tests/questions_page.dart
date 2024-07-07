@@ -80,11 +80,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
       body: Stack(
         children: [
           Container(
-            height: 230,
+            height: 245,
             color: Colors.blue[400],
           ),
           Container(
-            height: 130,
+            height: 145,
             color: Colors.blue,
           ),
           // مركز الصفحة
