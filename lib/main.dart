@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'layouts/empty_page.dart';
-import 'layouts/lessons_page.dart';
-import 'layouts/tests_page.dart';
+import 'layouts/info_page.dart';
+import 'layouts/lessons/lessons_page.dart';
+import 'layouts/tests/tests_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/info': (context) => const InfoPage(),
+        '/lessons': (context) => const LessonsPage(),
+        '/tests': (context) => const TestsPage(),
+      },
     );
   }
 }
@@ -47,13 +53,11 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const Spacer(), // Push the content to the top
+                const Spacer(),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent
-                        .withOpacity(0.9), // Adjust opacity as needed
-                    borderRadius:
-                        BorderRadius.circular(12), // Adjust radius as needed
+                    color: Colors.blueAccent.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   padding:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -70,7 +74,6 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
@@ -80,12 +83,7 @@ class HomePage extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const EmptyPage(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/info');
                     },
                     child: const Text("تعريف بمحتوى التطبيق "),
                   ),
@@ -99,12 +97,7 @@ class HomePage extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LessonsPage(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/lessons');
                     },
                     child: const Text("المحتوى"),
                   ),
@@ -118,17 +111,12 @@ class HomePage extends StatelessWidget {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const TestsPage(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/tests');
                     },
                     child: const Text("الاختبارات"),
                   ),
                 ),
-                const Spacer(), // Push the content to the bottom
+                const Spacer(),
               ],
             ),
           ),

@@ -16,12 +16,14 @@ class DatabaseHelper {
 
   static Database? _database;
 
+  // دالة للحصول على قاعدة البيانات
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
   }
 
+  // دالة لتهيئة قاعدة البيانات
   Future<Database> _initDatabase() async {
     if (kIsWeb) {
       var factory = databaseFactoryFfiWeb;
@@ -38,6 +40,7 @@ class DatabaseHelper {
     }
   }
 
+  // دالة للتحقق من وجود الجداول وإنشائها إذا لم تكن موجودة
   Future<void> _checkAndCreateTables(Database db) async {
     var result = await db.rawQuery(
         "SELECT name FROM sqlite_master WHERE type='table' AND name='tests'");
@@ -46,6 +49,7 @@ class DatabaseHelper {
     }
   }
 
+  // دالة لإنشاء الجداول عند تهيئة قاعدة البيانات
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
     CREATE TABLE lessons (
@@ -76,6 +80,7 @@ class DatabaseHelper {
     )
     ''');
 
+    // إدراج بيانات عينة للدروس، الاختبارات، والأسئلة
     await db.insert('lessons', {'lesson_name': 'الدرس الأول'});
     await db
         .insert('tests', {'lesson_id': 1, 'test_name': 'إختبار الدرس الأول'});
@@ -111,13 +116,13 @@ class DatabaseHelper {
     });
   }
 
-  // هنا تم انشاء List الإختبارات وبنفس الطريقة يجب انشاء الدروس
+  // دالة لجلب الاختبارات
   Future<List<Map<String, dynamic>>> getTests() async {
     Database db = await database;
     return await db.query('tests');
   }
 
-  // هنا تم انشاء List الاسئلة
+  // دالة لجلب الأسئلة بناءً على معرف الاختبار مرتبة حسب الحالة
   Future<List<Map<String, dynamic>>> getQuestions(int testId) async {
     Database db = await database;
     return await db.query(
@@ -126,5 +131,33 @@ class DatabaseHelper {
       whereArgs: [testId],
       orderBy: 'state ASC',
     );
+  }
+
+  // دالة لتحديث حالة السؤال بناءً على معرفه
+  Future<void> updateQuestionState(int questionId, int newState) async {
+    Database db = await database;
+    await db.update(
+      'questions',
+      {'state': newState},
+      where: 'question_id = ?',
+      whereArgs: [questionId],
+    );
+  }
+
+  // دالة لجلب الدروس
+  Future<List<Map<String, dynamic>>> getLessons() async {
+    Database db = await database;
+    return await db.query('lessons');
+  }
+
+  // دالة لجلب الدرس بناءً على معرف الدرس
+  Future<Map<String, dynamic>?> getLessonById(int lessonId) async {
+    Database db = await database;
+    List<Map<String, dynamic>> result = await db.query(
+      'lessons',
+      where: 'lesson_id = ?',
+      whereArgs: [lessonId],
+    );
+    return result.isNotEmpty ? result.first : null;
   }
 }
