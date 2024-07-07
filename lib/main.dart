@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "تبسيط تعليم برمجة التطبيقات الشبكية",
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -36,6 +37,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("تطبيق تبسيط تعليم برمجة التطبيقات الشبكية"),
+        leading: Icon(Icons.menu),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
       ),
       body: Stack(
         children: [
