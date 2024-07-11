@@ -18,19 +18,18 @@ class TestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       appBar: AppBar(
         title: const Text('الإختبارات'),
+        centerTitle: true,
+        backgroundColor: Colors.blue[200],
+        elevation: 0,
       ),
       body: Stack(
         children: [
-          // إعداد الخلفية للصورة
           Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            height: 1000,
+            color: Colors.blue,
           ),
           // FutureBuilder لبناء الواجهة بناءً على بيانات قاعدة البيانات
           FutureBuilder<List<Test>>(
@@ -43,19 +42,19 @@ class TestsPage extends StatelessWidget {
                   itemCount: tests!.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 2.0),
+                      padding: const EdgeInsets.symmetric(vertical: 2),
                       child: Card(
-                        elevation: 4.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
+                        elevation: 0,
+                        color: Colors.blue[400],
+                        shape: const RoundedRectangleBorder(),
                         child: ListTile(
                           title: Center(
                             child: Text(
                               tests[index].testName,
                               style: const TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                           // عند الضغط على أي اختبار، يتم الانتقال إلى صفحة الأسئلة الخاصة بهذا الاختبار

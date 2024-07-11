@@ -54,7 +54,14 @@ class DatabaseHelper {
     await db.execute('''
     CREATE TABLE lessons (
         lesson_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        lesson_name TEXT
+        lesson_name TEXT,
+        lesson_first_title TEXT,
+        lesson_first_content TEXT,
+        lesson_second_title TEXT,
+        lesson_second_content TEXT,
+        lesson_third_title TEXT,
+        lesson_third_content TEXT,
+        lesson_link TEXT
     )
     ''');
     await db.execute('''
@@ -81,10 +88,30 @@ class DatabaseHelper {
     ''');
 
     // إدراج بيانات عينة للدروس، الاختبارات، والأسئلة
-    await db.insert('lessons', {'lesson_name': 'الدرس الأول'});
+    await db.insert('lessons', {
+      'lesson_name': 'الدرس الأول',
+      'lesson_first_title': 'النياسب',
+      'lesson_first_content':
+          'حكي عن النياسب لانو النياسب ظرييفة ما هيك الدرس شي ظريف وحلو وبيفيد الصحة لهيك الكل لازم يدرس متل الشاطر',
+      'lesson_second_title': 'أهمية النياسب',
+      'lesson_second_content': 'مهمة كتير',
+      'lesson_third_title': 'ترتيب العمل',
+      'lesson_third_content': 'واحد بعدين 2 بعدين تالتة',
+      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo'
+    });
+    await db.insert('lessons', {
+      'lesson_name': 'الدرس الثاني',
+      'lesson_first_title': 'السيمافور',
+      'lesson_first_content':
+          'حكي عن السمافور لانو السيمافور ظريف ما هيك الدرس شي ظريف وحلو وبيفيد الصحة لهيك الكل لازم يدرس متل الشاطر',
+      'lesson_second_title': 'شبعرفني',
+      'lesson_second_content': 'هي مثال كرمال نفهم شلون نشتغل',
+      'lesson_third_title': 'هي بدنا نحولها sql ونقعد نعبيها متل الحبابين',
+      'lesson_third_content': 'تماما متل العنوان >3',
+      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo'
+    });
     await db
         .insert('tests', {'lesson_id': 1, 'test_name': 'إختبار الدرس الأول'});
-    await db.insert('lessons', {'lesson_name': 'الدرس الثاني'});
     await db
         .insert('tests', {'lesson_id': 2, 'test_name': 'إختبار الدرس الثاني'});
     await db.insert('questions', {

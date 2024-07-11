@@ -80,12 +80,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
       body: Stack(
         children: [
           Container(
-            height: 245,
+            height: 220,
             color: Colors.blue[400],
-          ),
-          Container(
-            height: 145,
-            color: Colors.blue,
           ),
           // مركز الصفحة
           Center(
@@ -105,15 +101,20 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // نص السؤال
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          currentQuestion.questionText,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                      Container(
+                        height: 100,
+                        color: Colors.blue,
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            currentQuestion.questionText,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),

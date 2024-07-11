@@ -10,41 +10,73 @@ class ScorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       appBar: AppBar(
         title: const Text('النتائج'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+        elevation: 0,
       ),
       body: Stack(
         children: [
-          // إعداد الخلفية للصورة
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           // إعداد واجهة النتيجة في منتصف الشاشة
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'علامتك',
-                  style: TextStyle(fontSize: 24.0),
+                Container(
+                  color: Colors.blue[300],
+                  width: double.infinity,
+                  child: const Text(
+                    'علامتك',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-                Text(
-                  '$score / $totalQuestions',
-                  style: const TextStyle(
-                      fontSize: 24.0, fontWeight: FontWeight.bold),
+                Container(
+                  color: Colors.blue[300],
+                  width: double.infinity,
+                  child: Text(
+                    '$score / $totalQuestions',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    // العودة إلى صفحة الاختبارات الرئيسية
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
-                  },
-                  child: const Text('العودة إلى الصفحة الرئيسية'),
+                Container(
+                  height: 20,
+                  color: Colors.blue[300],
+                  width: double.infinity,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // العودة إلى صفحة الاختبارات الرئيسية
+                      Navigator.popUntil(context, ModalRoute.withName('/'));
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.blue,
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0),
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'العودة إلى الصفحة الرئيسية',
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),

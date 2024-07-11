@@ -53,7 +53,7 @@ class LessonsPage extends StatelessWidget {
                         child: ListTile(
                           title: Center(
                             child: Text(
-                              lessons[index].lesson_name,
+                              lessons[index].lessonName,
                               style: const TextStyle(
                                   fontSize: 18.0, fontWeight: FontWeight.bold),
                             ),
@@ -64,7 +64,7 @@ class LessonsPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LessonDetailsPage(
-                                    lessonId: lessons[index].lesson_id),
+                                    lessonId: lessons[index].lessonId),
                               ),
                             );
                           },

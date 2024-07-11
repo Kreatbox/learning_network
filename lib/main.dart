@@ -39,6 +39,9 @@ class HomePage extends StatelessWidget {
         title: const Text("تطبيق تبسيط تعليم برمجة التطبيقات الشبكية"),
         leading: const Icon(Icons.menu),
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.logout))],
+        elevation: 0,
+        backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: Stack(
         children: [
