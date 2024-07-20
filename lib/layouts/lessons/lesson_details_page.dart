@@ -5,7 +5,6 @@ import '../../models/lessons/lesson_model.dart';
 
 class LessonDetailsPage extends StatefulWidget {
   final int lessonId;
-
   const LessonDetailsPage({required this.lessonId, Key? key}) : super(key: key);
 
   @override
@@ -15,9 +14,8 @@ class LessonDetailsPage extends StatefulWidget {
 
 class _LessonDetailsPageState extends State<LessonDetailsPage> {
   late Future<Lesson> _lessonFuture;
-  int _currentStep = 0;
   YoutubePlayerController? _youtubePlayerController;
-
+  var _currentStep = 0;
   @override
   void initState() {
     super.initState();
@@ -55,16 +53,38 @@ class _LessonDetailsPageState extends State<LessonDetailsPage> {
           } else {
             Lesson lesson = snapshot.data!;
             List<Widget> steps = [
-              _buildStep(lesson.lessonFirstTitle, lesson.lessonFirstContent),
-              _buildStep(lesson.lessonSecondTitle, lesson.lessonSecondContent),
-              _buildStep(lesson.lessonThirdTitle, lesson.lessonThirdContent),
+              _buildStep(
+                lesson.lessonFirstTitle,
+                lesson.lessonFirstContent,
+                lesson.lessonFirstImage,
+              ),
+              _buildStep(
+                lesson.lessonSecondTitle,
+                lesson.lessonSecondContent,
+                lesson.lessonSecondImage,
+              ),
+              _buildStep(
+                lesson.lessonThirdTitle,
+                lesson.lessonThirdContent,
+                lesson.lessonThirdImage,
+              ),
+              _buildStep(
+                lesson.lessonFourthTitle,
+                lesson.lessonFourthContent,
+                lesson.lessonFourthImage,
+              ),
               _buildVideoPlayer(lesson.lessonLink),
             ];
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(child: steps[_currentStep]),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: steps[_currentStep],
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -77,7 +97,7 @@ class _LessonDetailsPageState extends State<LessonDetailsPage> {
                         },
                         child: const Text('السابق'),
                       ),
-                    const Spacer(), // Adds space between the buttons to push the next button to the right
+                    const Spacer(),
                     if (_currentStep < steps.length - 1)
                       TextButton(
                         onPressed: () {
@@ -97,24 +117,50 @@ class _LessonDetailsPageState extends State<LessonDetailsPage> {
     );
   }
 
-  Widget _buildStep(String title, String content) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+  Widget _buildStep(String title, String content, String imageUrl) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+              textAlign: TextAlign.right, // Align text to the right
+            ),
           ),
-          const SizedBox(height: 20.0),
-          Text(
-            content,
-            style: const TextStyle(fontSize: 16.0),
+        ),
+        const SizedBox(height: 10.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Text(
+              content,
+              style: const TextStyle(
+                fontSize: 16.0,
+                color: Colors.black54,
+              ),
+              textAlign: TextAlign.right, // Align text to the right
+            ),
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 20.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Image.asset(
+            imageUrl,
+            fit: BoxFit.cover,
+            width: double.infinity,
+          ),
+        ),
+      ],
     );
   }
 
