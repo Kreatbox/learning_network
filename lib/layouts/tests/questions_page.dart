@@ -109,13 +109,16 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         width: double.infinity,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            currentQuestion.questionText,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Text(
+                              currentQuestion.questionText,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
@@ -156,9 +159,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: Text(
-                                      currentQuestion.choices[i],
-                                      style: const TextStyle(fontSize: 18.0),
+                                    child: Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: Text(
+                                        currentQuestion.choices[i],
+                                        style: const TextStyle(fontSize: 18.0),
+                                      ),
                                     ),
                                   ),
                                 ),

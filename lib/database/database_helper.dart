@@ -137,22 +137,237 @@ class DatabaseHelper {
         .insert('tests', {'lesson_id': 2, 'test_name': 'إختبار الدرس الثاني'});
     await db.insert('questions', {
       'test_id': 1,
-      'question_text': ':الحالة الاولى في دورة حياة النيسب هي',
-      'choice1': 'عدم الانطلاق',
-      'choice2': 'الانطلاق',
-      'choice3': 'التوقف الأول',
-      'choice4': 'التعليق',
+      'question_text': 'ما هي ميزة تعددية النيسب في الحاسب:',
+      'choice1': 'تنفيذ عملية واحدة في وقت واحد',
+      'choice2': 'تنفيذ عدة عمليات بشكل متسلسل',
+      'choice3': 'تنفيذ عدة عمليات بشكل متوازي',
+      'choice4': 'توقف العمليات حتى انتهاء عملية واحدة',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ماذا يحدث إذا وصل نيسب التشغيل إلى جزء لم يحمله نيسب التحميل بعد:',
+      'choice1': 'يوقف نيسب التشغيل حتى انتهاء التحميل',
+      'choice2': 'يطلب من المستخدم إعادة التحميل',
+      'choice3': 'يتم مزامنة النيسبين',
+      'choice4': 'يتم إيقاف نيسب التحميل',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ماذا كانت ميزة تعددية النيسب محصورة على متخصصي برمجة النظم فقط في الماضي:',
+      'choice1': 'لعدم توفر الأدوات اللازمة في البرمجة القديمة',
+      'choice2': 'لصعوبة استخدام النيسب',
+      'choice3': 'لأن البرمجة القديمة كانت تستخدم لغة Ada فقط',
+      'choice4': 'لأن ميزة تعددية النيسب غير مفيدة',
       'correct_choice': 1
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي البيئة التي قدمت الأدوات اللازمة للتعامل مع النيسب في الوقت الحاضر:',
+      'choice1': 'لغة Ada',
+      'choice2': 'بيئة العمل NET',
+      'choice3': 'البرمجة القديمة',
+      'choice4': 'الأدوات البرمجية القديمة',
+      'correct_choice': 2
     });
     await db.insert('questions', {
       'test_id': 1,
-      'question_text': ':يدخل النيسب في حالة الإيقاف أو الإحباط عند',
-      'choice1': 'انهاء المهام بشكل طبيعي',
-      'choice2': 'انهاء المهام بشكل مجبر',
-      'choice3': 'عند العجز على  استخدام أي معالج',
-      'choice4': 'الجواب 1 و 2',
+      'question_text': 'ما هي الحالة التي يبدأ منها نيسب جديد في دورة حياته:',
+      'choice1': 'تشغيل Running',
+      'choice2': 'توقف Stopped',
+      'choice3': 'عدم الانطلاق Unstarted',
+      'choice4': 'انتظار Waiting',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': 'ماذا يحدث عندما يتم استدعاء الطريقة Start لنيسب:',
+      'choice1': 'يصبح النيسب مجمدا Blocked',
+      'choice2': 'يبدأ النيسب في حالة التشغيل Running',
+      'choice3': 'يدخل النيسب في حالة السبات Sleep',
+      'choice4': 'يتم إنهاء النيسب بشكل مفاجئ',
+      'correct_choice': 2
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'متى يدخل النيسب في حالة الإيقاف أو الإحباط Stopped or Aborted:',
+      'choice1': 'عند الانتهاء من تنفيذ المهمة',
+      'choice2': 'عند استدعاء طريقة الإحباط Abort',
+      'choice3': 'عند تعذر الوصول إلى المعالج',
+      'choice4': 'عند حدوث استثناء Interrupt',
+      'correct_choice': 2
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي الحالة التي يصبح فيها النيسب غير قادر على استخدام المعالج:',
+      'choice1': 'تشغيل Running',
+      'choice2': 'إيقاف Stopped',
+      'choice3': 'تجميد Blocked',
+      'choice4': 'انتظار Waiting',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': 'كيف يمكن لنيسب أن يدخل حالة الانتظار Waiting:',
+      'choice1': 'عند استدعاء الطريقة Sleep',
+      'choice2': 'عند استدعاء الطريقة Join',
+      'choice3': 'عند استدعاء الطريقة Wait من الصف Monitor',
+      'choice4': 'عند تعذر وصوله إلى قفل Mutex',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي الطريقة التي يمكن لنيسب استخدامها للعودة إلى حالة التشغيل بعد السبات Sleep:',
+      'choice1': 'استدعاء الطريقة Pulse',
+      'choice2': 'استدعاء الطريقة Join',
+      'choice3': 'انتظار انتهاء وقت السبات',
+      'choice4': 'استدعاء الطريقة Interrupt',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'متى يعود النيسب إلى حالة التشغيل بعد الإيقاف المؤقت Suspend:',
+      'choice1': 'عند استدعاء الطريقة Resume',
+      'choice2': 'عند انتهاء وقت السبات',
+      'choice3': 'عند استدعاء الطريقة Pulse',
+      'choice4': 'عند تنفيذ نيسب ذو أولوية أكبر',
+      'correct_choice': 1
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي الحالة التي لا يمكن للنيسب الاستجابة فيها لطلب الإيقاف المؤقت Suspend:',
+      'choice1': 'عندما يكون في حالة الإيقاف Stopped',
+      'choice2': 'عندما يكون في حالة الانتظار Waiting',
+      'choice3': 'عندما يكون في حالة التجميد Blocked',
+      'choice4': 'عندما يكون في حالة السبات Sleep',
       'correct_choice': 4
     });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': 'ما الذي يسبب تجميد النيسب في حالة التجمد Blocked:',
+      'choice1': 'انتظار الحصول على قفل Mutex',
+      'choice2': 'انتظار انتهاء وقت السبات',
+      'choice3': 'انتظار تنفيذ عملية دخل خروج',
+      'choice4': 'انتظار إشعار من نيسب آخر',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'كيف يمكن للنيسب العودة إلى حالة التشغيل بعد انتهاء معالجته لعمليات دخل خروج:',
+      'choice1': 'استدعاء الطريقة Pulse',
+      'choice2': 'استدعاء الطريقة Join',
+      'choice3': 'عودة النيسب من حالة التجمد Blocked',
+      'choice4': 'استدعاء الطريقة Interrupt',
+      'correct_choice': 3
+    });
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي أعلى درجة أولوية يمكن تعيينها لنيسب ضمن تعداد Thread Priority:',
+      'choice1': 'Below Normal',
+      'choice2': 'Normal',
+      'choice3': 'Above Normal',
+      'choice4': 'Highest',
+      'correct_choice': 4
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي ميزة نظام تشغيل Windows التي تسمح للنياسب ذات الأولوية المتساوية بمشاركة المعالج:',
+      'choice1': 'Time Sharing',
+      'choice2': 'Round-Robin Scheduling',
+      'choice3': 'Quantum Allocation',
+      'choice4': 'Priority Scheduling',
+      'correct_choice': 1
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': 'ماذا يحدث عندما تنتهي الكمة المخصصة لنيسب معين:',
+      'choice1': 'يستمر النيسب في التنفيذ حتى ينتهي عمله',
+      'choice2': 'يتم تأجيل النيسب حتى ينتهي نيسب آخر بنفس الأولوية',
+      'choice3': 'ينتقل المعالج إلى نيسب آخر إذا كان موجودا',
+      'choice4': 'يتم إيقاف النيسب بشكل مفاجئ',
+      'correct_choice': 3
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ما هي الطريقة التي يستخدمها مجدول النياسب لضمان عمل النياسـب ذات الأولوية العالية:',
+      'choice1': 'Round-Robin Fashion',
+      'choice2': 'Priority Queuing',
+      'choice3': 'Time Slicing',
+      'choice4': 'First-Come-First-Served',
+      'correct_choice': 1
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ماذا يحدث إذا كانت هناك نياسب جديدة ذات أولوية أعلى عند تنفيذ نياسب ذات أولوية دنيا:',
+      'choice1': 'ستستمر النياسب ذات الأولوية الدنيا في التنفيذ حتى تنتهي',
+      'choice2': 'سيتم تأجيل تنفيذ النياسب ذات الأولوية الدنيا بشكل غير محدد',
+      'choice3': 'سيتم إيقاف النياسب ذات الأولوية العليا',
+      'choice4': 'سيتم دمج الأولويات في التنفيذ بشكل متساوي',
+      'correct_choice': 2
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text': 'كيف يمكن ضبط أولوية نيسب في .NET:',
+      'choice1': 'بإعداد قيمة الخاصية Priority',
+      'choice2': 'بإعداد قيمة الخاصية Scheduling',
+      'choice3': 'بإعداد قيمة الخاصية Priority Level',
+      'choice4': 'بإعداد قيمة الخاصية Thread Level',
+      'correct_choice': 1
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'ماذا يحدث إذا تم تعيين أولوية نيسب غير معروفة في تعداد Priority Thread:',
+      'choice1': 'يتم تعيين أولوية افتراضية للنيسب',
+      'choice2': 'يظهر استثناء Argument Exception',
+      'choice3': 'يتم تجاهل تعيين الأولوية',
+      'choice4': 'يتم تعيين أولوية دنيا تلقائياً',
+      'correct_choice': 2
+    });
+
+    await db.insert('questions', {
+      'test_id': 1,
+      'question_text':
+          'كيف يتم معالجة النياسب في الحاسوب ذو معالج واحد عند استخدام طريقة روبن الدائرية:',
+      'choice1': 'يتم تنفيذ النياسب بالتتابع حتى ينتهي كل منها',
+      'choice2': 'يتم تخصيص وقت محدد لكل نيسب ثم الانتقال إلى نيسب آخر',
+      'choice3': 'يتم تنفيذ النياسب ذات الأولوية العالية أولاً',
+      'choice4': 'يتم تجاهل الأولويات وتنفيذ النياسب بشكل عشوائي',
+      'correct_choice': 2
+    });
+
     await db.insert('questions', {
       'test_id': 2,
       'question_text': ':من خواص الإتصال المرتبط',
