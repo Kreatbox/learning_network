@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import '../../database/database_helper.dart';
 import '../../models/tests/question_model.dart';
@@ -11,11 +9,10 @@ class QuestionsPage extends StatefulWidget {
   const QuestionsPage({Key? key, required this.testId}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _QuestionsPageState createState() => _QuestionsPageState();
+  QuestionsPageState createState() => QuestionsPageState();
 }
 
-class _QuestionsPageState extends State<QuestionsPage> {
+class QuestionsPageState extends State<QuestionsPage> {
   late Future<List<Question>> futureQuestions;
   List<Question> questions = [];
   int currentQuestionIndex = 0;
@@ -145,12 +142,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                                     i + 1)
                                         ? (currentQuestion.correctChoice ==
                                                 i + 1
-                                            ? MaterialStateProperty.all<Color>(
+                                            ? WidgetStateProperty.all<Color>(
                                                 Colors.green)
-                                            : MaterialStateProperty.all<Color>(
+                                            : WidgetStateProperty.all<Color>(
                                                 Colors.red))
                                         : null,
-                                    shape: MaterialStateProperty.all<
+                                    shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(0),
@@ -186,8 +183,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                 }
                               : null,
                           style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(0),
                               ),

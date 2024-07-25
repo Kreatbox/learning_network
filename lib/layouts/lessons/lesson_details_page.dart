@@ -1,37 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import '../../database/database_helper.dart';
-import '../../models/lessons/lesson_model.dart';
+import '../../database/database_helper.dart'; // استيراد مكتبة قاعدة البيانات
+import '../../models/lessons/lesson_model.dart'; // استيراد نموذج الدرس
+import 'lesson_details_helpers.dart'; // استيراد ملف المساعد للدرس
 
 class LessonDetailsPage extends StatefulWidget {
-  final int lessonId;
+  final int lessonId; // معرّف الدرس
   const LessonDetailsPage({required this.lessonId, Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _LessonDetailsPageState createState() => _LessonDetailsPageState();
+  // تجاهل التحذير حول أنواع المكتبة الخاصة في الواجهة العامة
+  LessonDetailsPageState createState() => LessonDetailsPageState();
 }
 
-class _LessonDetailsPageState extends State<LessonDetailsPage> {
-  late Future<Lesson> _lessonFuture;
-  YoutubePlayerController? _youtubePlayerController;
-  var _currentStep = 0;
+class LessonDetailsPageState extends State<LessonDetailsPage> {
+  late Future<Lesson> _lessonFuture; // مستقبلاً يحمل بيانات الدرس
+  YoutubePlayerController? _youtubePlayerController; // متحكم لمشغل الفيديو
+  var _currentStep = 0; // الخطوة الحالية
+
   @override
   void initState() {
     super.initState();
-    _lessonFuture = fetchLesson();
+    _lessonFuture = fetchLesson(); // جلب بيانات الدرس عند تهيئة الحالة
   }
 
+  /// جلب بيانات الدرس من قاعدة البيانات
   Future<Lesson> fetchLesson() async {
-    final dbHelper = DatabaseHelper();
-    Map<String, dynamic>? lessonMap =
-        await dbHelper.getLessonById(widget.lessonId);
-    return Lesson.fromJson(lessonMap!);
+    final dbHelper = DatabaseHelper(); // إنشاء مساعد قاعدة البيانات
+    Map<String, dynamic>? lessonMap = await dbHelper
+        .getLessonById(widget.lessonId); // جلب بيانات الدرس من قاعدة البيانات
+    return Lesson.fromJson(lessonMap!); // تحويل البيانات إلى نموذج درس
   }
 
   @override
   void dispose() {
-    _youtubePlayerController?.close();
+    _youtubePlayerController
+        ?.close(); // إغلاق متحكم الفيديو عند التخلص من الصفحة
     super.dispose();
   }
 
@@ -39,73 +43,81 @@ class _LessonDetailsPageState extends State<LessonDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تفاصيل الدرس'),
+        title: const Text('تفاصيل الدرس'), // عنوان الصفحة
       ),
       body: FutureBuilder<Lesson>(
-        future: _lessonFuture,
+        future: _lessonFuture, // المستقبِل الذي يحمل بيانات الدرس
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child:
+                    CircularProgressIndicator()); // عرض مؤشر الانتظار إذا كانت البيانات قيد التحميل
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+                child: Text(
+                    'Error: ${snapshot.error}')); // عرض رسالة خطأ إذا حدث خطأ أثناء الجلب
           } else if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text('لا يوجد بيانات للدرس'));
+            return const Center(
+                child: Text(
+                    'لا يوجد بيانات للدرس')); // عرض رسالة إذا لم تكن هناك بيانات
           } else {
-            Lesson lesson = snapshot.data!;
+            Lesson lesson = snapshot.data!; // بيانات الدرس
             List<Widget> steps = [
-              _buildStep(
-                lesson.lessonFirstTitle,
-                lesson.lessonFirstContent,
-                lesson.lessonFirstImage,
+              buildStep(
+                lesson.lessonFirstTitle, // عنوان الخطوة الأولى
+                lesson.lessonFirstContent, // محتوى الخطوة الأولى
+                lesson.lessonFirstImage, // صورة الخطوة الأولى
               ),
-              _buildStep(
-                lesson.lessonSecondTitle,
-                lesson.lessonSecondContent,
-                lesson.lessonSecondImage,
+              buildStep(
+                lesson.lessonSecondTitle, // عنوان الخطوة الثانية
+                lesson.lessonSecondContent, // محتوى الخطوة الثانية
+                lesson.lessonSecondImage, // صورة الخطوة الثانية
               ),
-              _buildStep(
-                lesson.lessonThirdTitle,
-                lesson.lessonThirdContent,
-                lesson.lessonThirdImage,
+              buildStep(
+                lesson.lessonThirdTitle, // عنوان الخطوة الثالثة
+                lesson.lessonThirdContent, // محتوى الخطوة الثالثة
+                lesson.lessonThirdImage, // صورة الخطوة الثالثة
               ),
-              _buildStep(
-                lesson.lessonFourthTitle,
-                lesson.lessonFourthContent,
-                lesson.lessonFourthImage,
+              buildStep(
+                lesson.lessonFourthTitle, // عنوان الخطوة الرابعة
+                lesson.lessonFourthContent, // محتوى الخطوة الرابعة
+                lesson.lessonFourthImage, // صورة الخطوة الرابعة
               ),
-              _buildVideoPlayer(lesson.lessonLink),
+              buildVideoPlayer(lesson.lessonLink), // مشغل الفيديو للدرس
             ];
             return Column(
               children: [
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: steps[_currentStep],
+                      padding:
+                          const EdgeInsets.all(16.0), // إضافة مسافة حول المحتوى
+                      child: steps[_currentStep], // عرض الخطوة الحالية
                     ),
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween, // توزيع الأزرار بالتساوي
                   children: [
                     if (_currentStep > 0)
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            _currentStep--;
+                            _currentStep--; // الانتقال إلى الخطوة السابقة
                           });
                         },
-                        child: const Text('السابق'),
+                        child: const Text('السابق'), // زر الخطوة السابقة
                       ),
-                    const Spacer(),
+                    const Spacer(), // إضافة مساحة فارغة بين الأزرار
                     if (_currentStep < steps.length - 1)
                       TextButton(
                         onPressed: () {
                           setState(() {
-                            _currentStep++;
+                            _currentStep++; // الانتقال إلى الخطوة التالية
                           });
                         },
-                        child: const Text('التالي'),
+                        child: const Text('التالي'), // زر الخطوة التالية
                       ),
                   ],
                 ),
@@ -115,90 +127,5 @@ class _LessonDetailsPageState extends State<LessonDetailsPage> {
         },
       ),
     );
-  }
-
-  Widget _buildStep(String title, String content, String imageUrl) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-              textAlign: TextAlign.right, // Align text to the right
-            ),
-          ),
-        ),
-        const SizedBox(height: 10.0),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Text(
-              content,
-              style: const TextStyle(
-                fontSize: 16.0,
-                color: Colors.black54,
-              ),
-              textAlign: TextAlign.right, // Align text to the right
-            ),
-          ),
-        ),
-        const SizedBox(height: 20.0),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Image.asset(
-            imageUrl,
-            fit: BoxFit.cover,
-            width: double.infinity,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildVideoPlayer(String videoUrl) {
-    final videoId = convertUrlToId(videoUrl);
-    if (videoId == null) {
-      return const Center(child: Text('رابط الفيديو غير صالح'));
-    }
-
-    final controller = YoutubePlayerController.fromVideoId(
-      videoId: videoId,
-      autoPlay: false,
-      params: const YoutubePlayerParams(
-        showControls: true,
-        showFullscreenButton: true,
-      ),
-    );
-
-    return Center(
-      child: AspectRatio(
-        aspectRatio: 16 / 9, // Normal video size aspect ratio
-        child: YoutubePlayer(
-          controller: controller,
-          aspectRatio: 16 / 9,
-        ),
-      ),
-    );
-  }
-
-  String? convertUrlToId(String url) {
-    final uri = Uri.parse(url);
-    if (uri.host.contains('youtube.com') || uri.host.contains('youtu.be')) {
-      if (uri.host.contains('youtube.com')) {
-        return uri.queryParameters['v'];
-      } else if (uri.host.contains('youtu.be')) {
-        return uri.pathSegments.first;
-      }
-    }
-    return null;
   }
 }
