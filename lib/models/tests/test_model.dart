@@ -4,8 +4,6 @@ class Test {
   final String testName;
 
   Test({required this.testId, required this.lessonId, required this.testName});
-
-  // إنشاء كائن Test من JSON
   factory Test.fromJson(Map<String, dynamic> json) {
     return Test(
       testId: json['test_id'],

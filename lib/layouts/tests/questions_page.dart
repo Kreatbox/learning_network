@@ -96,108 +96,153 @@ class QuestionsPageState extends State<QuestionsPage> {
                 } else {
                   questions = snapshot.data!;
                   Question currentQuestion = questions[currentQuestionIndex];
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  return Stack(
                     children: [
-                      // نص السؤال
-                      Container(
-                        height: 100,
-                        color: Colors.blue,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Text(
-                              currentQuestion.questionText,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // نص السؤال
+                          Container(
+                            height: 100,
+                            color: Colors.blue,
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Text(
+                                  currentQuestion.questionText,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      // الخيارات
-                      Column(
-                        children: [
-                          for (int i = 0; i < 4; i++)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: answered
-                                      ? null
-                                      : () {
-                                          submitAnswer(i);
-                                        },
-                                  style: ButtonStyle(
-                                    backgroundColor: answered &&
-                                            (selectedChoice == i ||
-                                                currentQuestion.correctChoice ==
-                                                    i + 1)
-                                        ? (currentQuestion.correctChoice ==
-                                                i + 1
-                                            ? WidgetStateProperty.all<Color>(
-                                                Colors.green)
-                                            : WidgetStateProperty.all<Color>(
-                                                Colors.red))
-                                        : null,
-                                    shape: WidgetStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(0),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Directionality(
-                                      textDirection: TextDirection.rtl,
-                                      child: Text(
-                                        currentQuestion.choices[i],
-                                        style: const TextStyle(fontSize: 18.0),
+                          const SizedBox(height: 20),
+                          // الخيارات
+                          Column(
+                            children: [
+                              for (int i = 0; i < 4; i++)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                      color: answered &&
+                                              (selectedChoice == i ||
+                                                  currentQuestion
+                                                          .correctChoice ==
+                                                      i + 1)
+                                          ? (currentQuestion.correctChoice ==
+                                                  i + 1
+                                              ? Colors.green
+                                              : Colors.red)
+                                          : Colors.white,
+                                      child: ElevatedButton(
+                                        onPressed: answered
+                                            ? null
+                                            : () {
+                                                submitAnswer(i);
+                                              },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.transparent,
+                                          shadowColor: Colors.transparent,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(0),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Directionality(
+                                            textDirection: TextDirection.rtl,
+                                            child: Text(
+                                              currentQuestion.choices[i],
+                                              style: const TextStyle(
+                                                  fontSize: 18.0),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          // زر التالي
+                          SizedBox(
+                            width: double.infinity,
+                            height: 40,
+                            child: ElevatedButton(
+                              onPressed: answered
+                                  ? () {
+                                      nextQuestion();
+                                    }
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                              ),
+                              child: Text(
+                                answered &&
+                                        currentQuestionIndex ==
+                                            questions.length - 1
+                                    ? 'انتهى'
+                                    : 'التالي',
                               ),
                             ),
+                          ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // زر التالي
-                      SizedBox(
-                        width: double.infinity,
-                        height: 40,
-                        child: ElevatedButton(
-                          onPressed: answered
-                              ? () {
-                                  nextQuestion();
-                                }
-                              : null,
-                          style: ButtonStyle(
-                            shape:
-                                WidgetStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0),
+                      // Floating message for reason
+                      if (answered)
+                        Positioned(
+                          top: 8,
+                          left: 8,
+                          right: 8,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.7),
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Text(
+                                  currentQuestion.reason,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontSize: 16.0, color: Colors.black),
+                                ),
                               ),
                             ),
                           ),
-                          child: Text(
-                            answered &&
-                                    currentQuestionIndex == questions.length - 1
-                                ? 'انتهى'
-                                : 'التالي',
-                          ),
                         ),
-                      ),
                     ],
                   );
                 }

@@ -73,16 +73,6 @@ class LessonDetailsPageState extends State<LessonDetailsPage> {
                 lesson.lessonSecondContent, // محتوى الخطوة الثانية
                 lesson.lessonSecondImage, // صورة الخطوة الثانية
               ),
-              buildStep(
-                lesson.lessonThirdTitle, // عنوان الخطوة الثالثة
-                lesson.lessonThirdContent, // محتوى الخطوة الثالثة
-                lesson.lessonThirdImage, // صورة الخطوة الثالثة
-              ),
-              buildStep(
-                lesson.lessonFourthTitle, // عنوان الخطوة الرابعة
-                lesson.lessonFourthContent, // محتوى الخطوة الرابعة
-                lesson.lessonFourthImage, // صورة الخطوة الرابعة
-              ),
               buildVideoPlayer(lesson.lessonLink), // مشغل الفيديو للدرس
             ];
             return Column(

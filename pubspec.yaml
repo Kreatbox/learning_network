@@ -64,8 +64,6 @@ flutter:
     - assets/images/background.jpg
     - assets/images/network.jpg
     - assets/images/lesson_1_second_image.jpg
-    - assets/images/lesson_1_third_image.jpg
-    - assets/images/lesson_1_fourth_image.jpg
 
   #  - assets/networking.db
 

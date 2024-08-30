@@ -62,12 +62,6 @@ class DatabaseHelper {
         lesson_second_title TEXT,
         lesson_second_content TEXT,
         lesson_second_image TEXT,
-        lesson_third_title TEXT,
-        lesson_third_content TEXT,
-        lesson_third_image TEXT,
-        lesson_fourth_title TEXT,
-        lesson_fourth_content TEXT,
-        lesson_fourth_image TEXT,
         lesson_link TEXT
     )
     ''');
@@ -89,6 +83,7 @@ class DatabaseHelper {
         choice3 TEXT,
         choice4 TEXT,
         correct_choice INTEGER,
+        reason TEXT,
         state INTEGER DEFAULT 0,
         FOREIGN KEY (test_id) REFERENCES tests (test_id)
     )

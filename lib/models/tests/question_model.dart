@@ -3,6 +3,7 @@ class Question {
   final String questionText;
   final List<String> choices;
   final int correctChoice;
+  final String reason;
   final int state;
 
   Question({
@@ -10,6 +11,7 @@ class Question {
     required this.questionText,
     required this.choices,
     required this.correctChoice,
+    required this.reason,
     required this.state,
   });
 
@@ -25,6 +27,7 @@ class Question {
         json['choice4']
       ],
       correctChoice: json['correct_choice'],
+      reason: json['reason'],
       state: json['state'],
     );
   }

@@ -7,12 +7,6 @@ class Lesson {
   final String lessonSecondTitle;
   final String lessonSecondContent;
   final String lessonSecondImage;
-  final String lessonThirdTitle;
-  final String lessonThirdContent;
-  final String lessonThirdImage;
-  final String lessonFourthTitle;
-  final String lessonFourthContent;
-  final String lessonFourthImage;
   final String lessonLink;
 
   Lesson({
@@ -24,12 +18,6 @@ class Lesson {
     required this.lessonSecondTitle,
     required this.lessonSecondContent,
     required this.lessonSecondImage,
-    required this.lessonThirdTitle,
-    required this.lessonThirdContent,
-    required this.lessonThirdImage,
-    required this.lessonFourthTitle,
-    required this.lessonFourthContent,
-    required this.lessonFourthImage,
     required this.lessonLink,
   });
 
@@ -43,12 +31,6 @@ class Lesson {
       lessonSecondTitle: json['lesson_second_title'],
       lessonSecondContent: json['lesson_second_content'],
       lessonSecondImage: json['lesson_second_image'],
-      lessonThirdTitle: json['lesson_third_title'],
-      lessonThirdContent: json['lesson_third_content'],
-      lessonThirdImage: json['lesson_third_image'],
-      lessonFourthTitle: json['lesson_fourth_title'],
-      lessonFourthContent: json['lesson_fourth_content'],
-      lessonFourthImage: json['lesson_fourth_image'],
       lessonLink: json['lesson_link'],
     );
   }
@@ -63,12 +45,6 @@ class Lesson {
       'lesson_second_title': lessonSecondTitle,
       'lesson_second_content': lessonSecondContent,
       'lesson_second_image': lessonSecondImage,
-      'lesson_third_title': lessonThirdTitle,
-      'lesson_third_content': lessonThirdContent,
-      'lesson_third_image': lessonThirdImage,
-      'lesson_fourth_title': lessonFourthTitle,
-      'lesson_fourth_content': lessonFourthContent,
-      'lesson_fourth_image': lessonFourthImage,
       'lesson_link': lessonLink,
     };
   }
