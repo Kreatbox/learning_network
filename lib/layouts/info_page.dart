@@ -7,7 +7,19 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('صفحة فارغة للتعديل عند الحاجة'),
+        title: const Text(
+            "الأسماء والأرقام الجامعية للطلاب المشاركين في المشروع "),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.abc),
+            label: "الدروس",
+          )
+        ],
+        onTap: (value) {
+          if (value == 0) Navigator.pushNamed(context, "lessons");
+        },
       ),
       body: Stack(
         children: [

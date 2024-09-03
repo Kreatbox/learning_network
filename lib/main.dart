@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/info');
                       },
-                      child: const Text(" أسماءالطلاب المشاركة ")),
+                      child: const Text(" الطلاب المشاركة ")),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
