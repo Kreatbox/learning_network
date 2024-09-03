@@ -84,15 +84,14 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      textStyle: const TextStyle(fontSize: 18),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/info');
-                    },
-                    child: const Text("تعريف بمحتوى التطبيق "),
-                  ),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        textStyle: const TextStyle(fontSize: 18),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/info');
+                      },
+                      child: const Text(" أسماءالطلاب المشاركة ")),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
