@@ -13,12 +13,22 @@ class InfoPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.abc),
+            icon: Icon(Icons.auto_awesome_motion_rounded),
             label: "الدروس",
-          )
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_tree_sharp),
+            label: "التدريبات",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_rounded),
+            label: "الطلاب المشاركة",
+          ),
         ],
         onTap: (value) {
-          if (value == 0) Navigator.pushNamed(context, "lessons");
+          if (value == 1) Navigator.pushNamed(context, "lessons");
+          if (value == 2) Navigator.pushNamed(context, "tests");
+          if (value == 0) Navigator.pushNamed(context, "info");
         },
       ),
       body: Stack(
