@@ -43,6 +43,7 @@ class LessonDetailsPageState extends State<LessonDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[200],
         title: const Text('تفاصيل الدرس'), // عنوان الصفحة
       ),
       body: FutureBuilder<Lesson>(
@@ -107,6 +108,7 @@ class LessonDetailsPageState extends State<LessonDetailsPage> {
                             _currentStep++; // الانتقال إلى الخطوة التالية
                           });
                         },
+
                         child: const Text('التالي'), // زر الخطوة التالية
                       ),
                   ],

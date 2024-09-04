@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_network/nav_bar.dart';
 import '../../database/database_helper.dart';
 import '../../models/tests/test_model.dart';
 import 'questions_page.dart';
@@ -25,6 +26,7 @@ class TestsPage extends StatelessWidget {
         backgroundColor: Colors.blue[200],
         elevation: 0,
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
       body: Stack(
         children: [
           Container(
@@ -45,14 +47,14 @@ class TestsPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 2),
                       child: Card(
                         elevation: 0,
-                        color: Colors.blue[400],
+                        color: Colors.blue[200],
                         shape: const RoundedRectangleBorder(),
                         child: ListTile(
                           title: Center(
                             child: Text(
                               tests[index].testName,
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold),
                             ),

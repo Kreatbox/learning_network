@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'layouts/info_page.dart';
 import 'layouts/lessons/lessons_page.dart';
 import 'layouts/tests/tests_page.dart';
@@ -38,21 +39,33 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("تطبيق تبسيط تعليم برمجة التطبيقات الشبكية"),
         leading: const Icon(Icons.menu),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.logout))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              SystemNavigator.pop(); // This closes the app
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.blue[200],
         centerTitle: true,
       ),
       body: Stack(
         children: [
+          // هون بدلت الخلفية بتقدر ترجعها بس بشيل هدول اللي عجنب
           Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/network.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            height: 1000,
+            color: Colors.blue,
           ),
+          // Container(
+          //   decoration: const BoxDecoration(
+          //     image: DecorationImage(
+          //       image: AssetImage('assets/images/network.jpg'),
+          //       fit: BoxFit.cover,
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -62,7 +75,7 @@ class HomePage extends StatelessWidget {
                 const Spacer(),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent.withOpacity(0.9),
+                    color: Colors.indigo.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   padding:
@@ -73,9 +86,9 @@ class HomePage extends StatelessWidget {
                       " مرحباً بك في تطبيق تبسيط تعليم برمجة التطبيقات الشبكية",
                       textAlign: TextAlign.center,
                       style: TextStyle(
+                        fontFamily: 'HSI',
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -86,7 +99,11 @@ class HomePage extends StatelessWidget {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 20),
-                        textStyle: const TextStyle(fontSize: 18),
+                        textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'HSI',
+                          color: Colors.black,
+                        ),
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/info');
@@ -99,7 +116,11 @@ class HomePage extends StatelessWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      textStyle: const TextStyle(fontSize: 18),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'HSI',
+                        color: Colors.black,
+                      ),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/lessons');
@@ -113,7 +134,11 @@ class HomePage extends StatelessWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      textStyle: const TextStyle(fontSize: 18),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'HSI',
+                        color: Colors.black,
+                      ),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/tests');

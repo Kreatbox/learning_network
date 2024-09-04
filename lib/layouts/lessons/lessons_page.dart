@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_network/nav_bar.dart';
 import '../../../database/database_helper.dart';
 import '../../../models/lessons/lesson_model.dart';
 import 'lesson_details_page.dart';
@@ -19,18 +20,16 @@ class LessonsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[200],
         title: const Text('الدروس'),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
       body: Stack(
         children: [
-          // إعداد الخلفية للصورة
+          // إعداد الخلفية للصور
           Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            height: 1000,
+            color: Colors.blue,
           ),
           // FutureBuilder لبناء الواجهة بناءً على بيانات قاعدة البيانات
           FutureBuilder<List<Lesson>>(
@@ -47,6 +46,7 @@ class LessonsPage extends StatelessWidget {
                           horizontal: 16.0, vertical: 2.0),
                       child: Card(
                         elevation: 4.0,
+                        color: Colors.blue[200],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
