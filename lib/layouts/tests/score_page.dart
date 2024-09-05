@@ -25,6 +25,12 @@ class ScorePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/background.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   color: Colors.blue[300],
                   width: double.infinity,
                   child: const Text(

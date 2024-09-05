@@ -22,14 +22,18 @@ class LessonsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
         title: const Text('الدروس'),
+        centerTitle: true,
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
       body: Stack(
         children: [
           // إعداد الخلفية للصور
           Container(
-            height: 1000,
-            color: Colors.blue,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage("assets/images/background.jpg"),
+              fit: BoxFit.cover,
+            )),
           ),
           // FutureBuilder لبناء الواجهة بناءً على بيانات قاعدة البيانات
           FutureBuilder<List<Lesson>>(

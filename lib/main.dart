@@ -53,19 +53,19 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // هون بدلت الخلفية بتقدر ترجعها بس بشيل هدول اللي عجنب
+          //
           Container(
             height: 1000,
             color: Colors.blue,
           ),
-          // Container(
-          //   decoration: const BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage('assets/images/network.jpg'),
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/network.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

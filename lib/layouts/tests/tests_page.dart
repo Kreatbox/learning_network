@@ -30,8 +30,11 @@ class TestsPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            height: 1000,
-            color: Colors.blue,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage("assets/images/background.jpg"),
+              fit: BoxFit.cover,
+            )),
           ),
           // FutureBuilder لبناء الواجهة بناءً على بيانات قاعدة البيانات
           FutureBuilder<List<Test>>(
