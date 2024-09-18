@@ -64,7 +64,11 @@ flutter:
     - assets/images/background.jpg
     - assets/images/network.jpg
     - assets/images/lesson_1_second_image.jpg
-
+    - assets/images/lesson_2_first_image.jpg
+    - assets/images/lesson_2_second_image.jpg
+    - assets/images/lesson_3_second_image.jpg
+    - assets/images/lesson_4_first_image.jpg
+    - assets/images/lesson_5_first_image.jpg
   #  - assets/networking.db
 
   # To add assets to your application, add an assets section, like this:

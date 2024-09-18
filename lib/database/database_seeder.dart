@@ -74,7 +74,7 @@ F. يمكن أن يعمل النيسب ويُحوّل إلى حالة التشغ
     - أو بعد انتهاء تنفيذ نيسب ذو أولوية أعلى من النيسب الحالي.
 ''',
       'lesson_second_image': 'assets/images/lesson_1_second_image.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo'
+      'lesson_link': 'https://youtu.be/vVYnDFg1dN4?si=j6eC8IhQHap0eB0D'
     });
     await db.insert('lessons', {
       'lesson_name': 'الدرس الثاني: النياسب 2',
@@ -102,7 +102,7 @@ F. يمكن أن يعمل النيسب ويُحوّل إلى حالة التشغ
 
 <image>
 ''',
-      'lesson_first_image': 'assets/images/empty.jpg',
+      'lesson_first_image': 'assets/images/lesson_2_first_image.jpg',
       'lesson_second_title': 'مزامنة النياسب :Synchronization Thread',
       'lesson_second_content': '''
 إذا كانت لدينا عدة نياسب تتشارك في استخدام نفس البيانات، يمكن لهذه النياسب أن تقرأ هذه البيانات أو تصل إلى جزء منها دون أي مشكلة. ولكن عندما تتشارك عدة نياسب في بيانات معينة وتقوم بتعديلها، قد تحدث مشاكل تضارب (collision) ما لم يتم مزامنة النياسب التي تشترك في هذه البيانات.
@@ -130,8 +130,8 @@ lock (objectReference) {
 عند انتهاء وضع حظر القفل لأي سبب، يُحرر (C#) الغرض من القفل الذي كان قد مُنح للنيسب. على سبيل المثال، عندما يتوقف عمل النيسب الذي يملك القفل بانتظار تحقق شرط معين ويدخل في حالة الانتظار، سوف يُحرر الغرض من القفل. وعند تحقق الشروط التي ينتظرها النيسب ويعود إلى حالة التشغيل، يمكنه إعادة طلب القفل على الغرض ليكمل مهمته.
 
 يجب ملاحظة الفرق بين أن يكون النيسب في حالة التجميد وليس في حالة الانتظار، وأن يكون في حالة انتظار / ضم / سبات عمليًا بانتظار تحقق شرط معين. ''',
-      'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo'
+      'lesson_second_image': 'assets/images/lesson_2_second_image.jpg',
+      'lesson_link': 'https://youtu.be/QrzoJAsE1Fo?si=skfx7tPHPnPbpFJg'
     });
     await db.insert('lessons', {
       'lesson_name': 'الدرس الثالث: برمجة التطبيقات الشبكية زبون/مخدم',
@@ -163,8 +163,8 @@ lock (objectReference) {
 
 الملخص: يعتمد اختيار نوع الاتصال على متطلبات التطبيق. إذا كانت الموثوقية والتسلسل من الأولويات، فإن الاتصال المرتبط يكون الخيار المناسب. بينما إذا كانت السرعة والكفاءة هي الأكثر أهمية، فإن الاتصال عديم الارتباط قد يكون الأفضل. الشبكة (مثل الإنترنت) تعتبر شبكة غير موثوقة، مما يعني أن المعلومات والبيانات المرسلة عبرها يمكن أن تفقد أو تتعطل أثناء عملية النقل.
 ''',
-      'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo'
+      'lesson_second_image': 'assets/images/lesson_3_second_image.jpg',
+      'lesson_link': 'https://youtu.be/esG_LYPAt9g?si=zpAPdakxM162g7dH'
     });
     await db.insert('lessons', {
       'lesson_name': 'الدرس الرابع: نقل البيانات',
@@ -184,7 +184,7 @@ lock (objectReference) {
 
 إضافة إلى ذلك، يمكن لبعض التطبيقات الحاسوبية والتي تحتاج إلى تقنيات موثوقية خاصة أن تقوم بتطوير بروتوكولات تعتمد على UDP لتوفير أداء أفضل.
 ''',
-      'lesson_first_image': 'assets/images/empty.jpg',
+      'lesson_first_image': 'assets/images/lesson_4_first_image.jpg',
       'lesson_second_title':
           'بناء مخدم TCP باستخدام مقابس تدفق البيانات (Sockets Stream)',
       'lesson_second_content': '''
@@ -214,7 +214,7 @@ Socket connection = server.AcceptSocket();
 معالجة مشكلات الاتصال
 توجد مشكلة شائعة عند استخدام طرق الاتصال المتزامنة، حيث قد تتسبب في حجب الطلبات الأخرى أثناء معالجة الطلبات الحالية، مما يعني أن العملاء الآخرين قد لا يتمكنون من الاتصال بالمخدم في الوقت الذي يكون فيه مشغولًا بمعالجة طلبات سابقة. لحل هذه المشكلة، يجب استخدام البرمجة متعددة الخيوط (Multi-threading). عند استقبال اتصال جديد من قبل المخدم، يقوم بإنشاء خيط (Thread) جديد لمعالجة الطلب الجديد، مما يسمح للمقبس وTCPListener بالاستمرار في استقبال اتصالات أخرى في نفس الوقت. ''',
       'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo',
+      'lesson_link': 'https://youtu.be/TAGoid4u6PY?si=QB3kYml0iB3ZnR4-',
     });
     await db.insert('lessons', {
       'lesson_name': 'الدرس الخامس: معالجة البيانات الموزعة',
@@ -244,7 +244,7 @@ Socket connection = server.AcceptSocket();
 المرحلة السادسة: إغلاق الاتصال  
 بعد انتهاء الاتصال، يتم إغلاق الاتصال بين المخدم والعميل. تُستخدم الطريقة Close من فئة TcpClient لإغلاق المقبس الذي يستخدمه العميل. إذا كان المقبس متصلاً، يقوم العميل بإغلاق المقبس وتحرير المراجع من فئة TcpClient للاتصال. بعد ذلك، يمكن إعادة استخدام الطريقة Connect لإنشاء اتصال جديد.
 ''',
-      'lesson_first_image': 'assets/images/empty.jpg',
+      'lesson_first_image': 'assets/images/lesson_5_first_image.jpg',
       'lesson_second_title': 'التشبيك عن بعد',
       'lesson_second_content': '''
 تعتبر تقنية "التشبيك عن بعد" في .NET واحدة من التقنيات المستخدمة في معالجة البيانات الموزعة. يتيح لك استخدام تقنيات "Remoting" في .NET الوصول إلى الموارد الموجودة على أجهزة أخرى عبر الشبكة.
@@ -264,7 +264,7 @@ Socket connection = server.AcceptSocket();
 تعد الإدارة بالغرض ضرورية لتحويل الكائنات بين التطبيقات عبر الشبكات.
 ''',
       'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo',
+      'lesson_link': 'https://youtu.be/qtZTf1L5v0E?si=oyGlwhRf4NBCemYK',
     });
     await db.insert('lessons', {
       'lesson_name': 'الدرس السادس: الادارة والتقانات',
