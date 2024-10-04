@@ -65,6 +65,7 @@ class QuestionsPageState extends State<QuestionsPage> {
             builder: (context) => ScorePage(
               score: score,
               totalQuestions: questions.length,
+              testId: widget.testId, // Pass testId
             ),
           ),
         );

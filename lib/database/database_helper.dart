@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:learning_network/models/tests/test_model.dart';
 import 'database_seeder.dart';
 // ignore: depend_on_referenced_packages
 import 'package:sqflite/sqflite.dart';
@@ -70,9 +71,11 @@ class DatabaseHelper {
         test_id INTEGER PRIMARY KEY AUTOINCREMENT,
         lesson_id INTEGER,
         test_name TEXT,
+        score_percentage REAL,
+        attempts INTEGER,
         FOREIGN KEY (lesson_id) REFERENCES lessons (lesson_id)
     )
-    ''');
+''');
     await db.execute('''
     CREATE TABLE questions (
         question_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -134,5 +137,34 @@ class DatabaseHelper {
       whereArgs: [lessonId],
     );
     return result.isNotEmpty ? result.first : null;
+  }
+
+  // دالة اعطاء العلامات
+  Future<void> updateTestScore(
+      int testId, double newScorePercentage, int newAttempts) async {
+    final db = await database;
+    await db.update(
+      'tests',
+      {
+        'score_percentage': newScorePercentage,
+        'attempts': newAttempts,
+      },
+      where: 'test_id = ?',
+      whereArgs: [testId],
+    );
+  }
+
+  Future<Test?> getTestById(int testId) async {
+    final db = await database;
+    List<Map<String, dynamic>> result = await db.query(
+      'tests',
+      where: 'test_id = ?',
+      whereArgs: [testId],
+    );
+    if (result.isNotEmpty) {
+      return Test.fromJson(result.first);
+    } else {
+      return null;
+    }
   }
 }

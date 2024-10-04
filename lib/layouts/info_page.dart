@@ -1,6 +1,4 @@
-// info_page.dart
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:learning_network/nav_bar.dart';
 
 class InfoPage extends StatelessWidget {
@@ -20,7 +18,7 @@ class InfoPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
               image: AssetImage("assets/images/background.jpg"),
               fit: BoxFit.cover,

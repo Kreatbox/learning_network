@@ -1,14 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:learning_network/database/database_helper.dart';
+import 'package:learning_network/models/tests/test_model.dart';
 
 class ScorePage extends StatelessWidget {
   final int score;
   final int totalQuestions;
+  final int testId;
 
-  const ScorePage(
-      {super.key, required this.score, required this.totalQuestions});
+  const ScorePage({
+    super.key,
+    required this.score,
+    required this.totalQuestions,
+    required this.testId,
+  });
+
+  void updateTestScore(int testId, int score, int totalQuestions) async {
+    final dbHelper = DatabaseHelper();
+
+    // Fetch the current test details
+    Test? currentTest = await dbHelper.getTestById(testId);
+
+    if (currentTest != null) {
+      // Calculate the new score percentage
+      double newPercentage = (score / totalQuestions) * 100;
+
+      // Calculate the updated average percentage
+      double updatedPercentage =
+          ((currentTest.scorePercentage * currentTest.attempts) +
+                  newPercentage) /
+              (currentTest.attempts + 1);
+
+      // Update the attempts
+      int newAttempts = currentTest.attempts + 1;
+
+      // Update the test record in the database
+      await dbHelper.updateTestScore(testId, updatedPercentage, newAttempts);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Call updateTestScore when the score page is shown
+    updateTestScore(testId, score, totalQuestions);
+
     return Scaffold(
       backgroundColor: Colors.blue[200],
       appBar: AppBar(
@@ -24,14 +58,9 @@ class ScorePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Fixed issue: Moved color inside BoxDecoration
                 Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/background.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  color: Colors.blue[300],
+                  color: Colors.blue,
                   width: double.infinity,
                   child: const Text(
                     'علامتك',
@@ -43,7 +72,9 @@ class ScorePage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  color: Colors.blue[300],
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                  ),
                   width: double.infinity,
                   child: Text(
                     '$score / $totalQuestions',
@@ -57,7 +88,9 @@ class ScorePage extends StatelessWidget {
                 ),
                 Container(
                   height: 20,
-                  color: Colors.blue[300],
+                  decoration: BoxDecoration(
+                    color: Colors.blue[300],
+                  ),
                   width: double.infinity,
                 ),
                 SizedBox(

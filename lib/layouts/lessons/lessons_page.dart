@@ -29,7 +29,7 @@ class LessonsPage extends StatelessWidget {
         children: [
           // إعداد الخلفية للصور
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
               image: AssetImage("assets/images/background.jpg"),
               fit: BoxFit.cover,

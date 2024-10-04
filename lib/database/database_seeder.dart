@@ -372,20 +372,48 @@ SOAP هو بروتوكول مستقل يُستخدم لتسهيل تبادل ا�
       'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo',
     });
 
-    await db
-        .insert('tests', {'lesson_id': 1, 'test_name': 'إختبار الدرس الأول'});
-    await db
-        .insert('tests', {'lesson_id': 2, 'test_name': 'إختبار الدرس الثاني'});
-    await db
-        .insert('tests', {'lesson_id': 3, 'test_name': 'إختبار الدرس الثالث'});
-    await db
-        .insert('tests', {'lesson_id': 4, 'test_name': 'إختبار الدرس الرابع'});
-    await db
-        .insert('tests', {'lesson_id': 5, 'test_name': 'إختبار الدرس الخامس'});
-    await db
-        .insert('tests', {'lesson_id': 6, 'test_name': 'إختبار الدرس السادس'});
-    await db
-        .insert('tests', {'lesson_id': 7, 'test_name': 'إختبار الدرس السابع'});
+    await db.insert('tests', {
+      'lesson_id': 1,
+      'test_name': 'إختبار النياسب 1',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 2,
+      'test_name': 'إختبار النياسب 2',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 3,
+      'test_name': 'إختبار برمجة التطبيقات الشبكية زبون/مخدم',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 4,
+      'test_name': 'إختبار نقل البيانات',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 5,
+      'test_name': 'إختبار معالجة البيانات الموزعة',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 6,
+      'test_name': 'إختبار الإدارة والتقانات',
+      'score_percentage': 0,
+      'attempts': 0
+    });
+    await db.insert('tests', {
+      'lesson_id': 7,
+      'test_name': 'إختبار برتوكولات الويب',
+      'score_percentage': 0,
+      'attempts': 0
+    });
 
     await db.insert('questions', {
       'test_id': 1,

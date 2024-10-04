@@ -30,7 +30,7 @@ class TestsPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
               image: AssetImage("assets/images/background.jpg"),
               fit: BoxFit.cover,
@@ -54,12 +54,37 @@ class TestsPage extends StatelessWidget {
                         shape: const RoundedRectangleBorder(),
                         child: ListTile(
                           title: Center(
-                            child: Text(
-                              tests[index].testName,
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold),
+                            child: Column(
+                              children: [
+                                Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Text(
+                                    tests[index].testName,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                // Display score percentage and attempts
+                                Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Text(
+                                    'العلامة: ${tests[index].scorePercentage.toStringAsFixed(2)}%',
+                                    style: const TextStyle(
+                                        color: Colors.black87, fontSize: 14.0),
+                                  ),
+                                ),
+                                Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: Text(
+                                    'عدد المحاولات: ${tests[index].attempts}',
+                                    style: const TextStyle(
+                                        color: Colors.black87, fontSize: 14.0),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           // عند الضغط على أي اختبار، يتم الانتقال إلى صفحة الأسئلة الخاصة بهذا الاختبار
@@ -79,7 +104,10 @@ class TestsPage extends StatelessWidget {
                 );
               } else if (snapshot.hasError) {
                 // عرض رسالة خطأ في حال حدوث مشكلة في جلب البيانات
-                return Center(child: Text("${snapshot.error}"));
+                return Center(
+                    child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text("${snapshot.error}")));
               }
               // عرض مؤشر تحميل في حال لم تنتهي عملية جلب البيانات بعد
               return const Center(child: CircularProgressIndicator());
