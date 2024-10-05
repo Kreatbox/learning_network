@@ -58,7 +58,6 @@ class ScorePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Fixed issue: Moved color inside BoxDecoration
                 Container(
                   color: Colors.blue,
                   width: double.infinity,
