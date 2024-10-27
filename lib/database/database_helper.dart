@@ -401,7 +401,7 @@ Socket connection = server.AcceptSocket();
 يتضح من خلال هذا المثال كيف توفر خدمات الويب مزيدًا من المعلومات المفيدة للعملاء، مما يعزز من تجربة الخدمة ويساعد الشركات على تقديم عروض متميزة.
 ''',
       'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo',
+      'lesson_link': 'https://youtu.be/Gm4Xr_TSnbE?si=lWDyyEY1JI90MWsk',
     });
 
     await db.insert('lessons', {
@@ -456,7 +456,7 @@ SOAP هو بروتوكول مستقل يُستخدم لتسهيل تبادل ا�
 بفضل هيكله المرن وقدرته على التعامل مع أنواع متعددة من البيانات، يُعتبر SOAP خيارًا مفضلًا في تطوير خدمات الويب. يتيح SOAP تكامل الأنظمة بسهولة ويضمن تبادل المعلومات بطريقة موثوقة.
 ''',
       'lesson_second_image': 'assets/images/empty.jpg',
-      'lesson_link': 'https://www.youtube.com/watch?v=9ANSu9Cg-Bo',
+      'lesson_link': 'https://youtu.be/c0SrO1S4vWc?si=P0ohQcyPSgwjPmq6',
     });
 
     await db.insert('tests', {
