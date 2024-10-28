@@ -5,6 +5,10 @@ import 'layouts/lessons/lessons_page.dart';
 import 'layouts/tests/tests_page.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
