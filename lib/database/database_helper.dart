@@ -400,7 +400,7 @@ Socket connection = server.AcceptSocket();
 
 يتضح من خلال هذا المثال كيف توفر خدمات الويب مزيدًا من المعلومات المفيدة للعملاء، مما يعزز من تجربة الخدمة ويساعد الشركات على تقديم عروض متميزة.
 ''',
-      'lesson_second_image': 'assets/images/empty.jpg',
+      'lesson_second_image': 'assets/images/lesson_6_second_image.jpg',
       'lesson_link': 'https://youtu.be/Gm4Xr_TSnbE?si=lWDyyEY1JI90MWsk',
     });
 
